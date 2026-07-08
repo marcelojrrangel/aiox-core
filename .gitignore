@@ -1,0 +1,12 @@
+node_modules/
+.aiox-core/node_modules/
+.aiox/logs/
+.aiox/sessions/
+.aiox/workflow-state/
+.aiox/project-status.yaml
+env/
+.env
+.env.local
+*.log
+.DS_Store
+Thumbs.db
