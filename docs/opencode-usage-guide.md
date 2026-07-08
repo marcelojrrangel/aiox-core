@@ -49,7 +49,7 @@ O AIOX fornece 12 agentes especializados de IA que podem ser invocados diretamen
 
 ```bash
 # Clone o fork com a integração OpenCode já incluída
-git clone https://github.com/SEU_USUARIO/aiox-core.git meu-projeto
+git clone https://github.com/marcelojrrangel/aiox-core.git meu-projeto
 cd meu-projeto
 
 # Instale as dependências do AIOX
@@ -78,7 +78,7 @@ Se o `/aiox-init` mostrar todos os componentes verdes, a integração está pron
 
 ```bash
 # Clone o fork (com AIOX + integração OpenCode)
-git clone https://github.com/SEU_USUARIO/aiox-core.git meu-projeto
+git clone https://github.com/marcelojrrangel/aiox-core.git meu-projeto
 cd meu-projeto
 
 # Instale as dependências
@@ -732,7 +732,7 @@ Este exemplo mostra o fluxo completo desde um diretório vazio até um sistema d
 
 ```bash
 # Clone o fork com AIOX + integração OpenCode
-git clone https://github.com/SEU_USUARIO/aiox-core.git crm-ia
+git clone https://github.com/marcelojrrangel/aiox-core.git crm-ia
 cd crm-ia
 
 # Instale as dependências

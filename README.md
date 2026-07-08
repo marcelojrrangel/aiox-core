@@ -18,19 +18,16 @@ Este fork adiciona:
 Antes de começar, configure o remote do seu fork no GitHub:
 
 ```bash
-# Crie um fork no GitHub e configure o remote
-git remote add origin https://github.com/SEU_USUARIO/aiox-core.git
+git remote add origin https://github.com/marcelojrrangel/aiox-core.git
 git branch -M main
 git push -u origin main
 ```
-
-> Substitua `SEU_USUARIO` pelo seu nome de usuário do GitHub.
 
 ## Início Rápido
 
 ```bash
 # Clone este fork
-git clone https://github.com/SEU_USUARIO/aiox-core.git meu-projeto
+git clone https://github.com/marcelojrrangel/aiox-core.git meu-projeto
 cd meu-projeto
 
 # Instale as dependências do AIOX
