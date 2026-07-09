@@ -1,0 +1,50 @@
+{
+  "name": "codemin",
+  "version": "1.0.0",
+  "description": "CodeMin — Assistente de Codificação LLM Local (CPU-only)",
+  "type": "module",
+  "bin": {
+    "codemin": "./dist/cli/index.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prebuild": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
+    "dev": "tsx watch src/cli/index.ts",
+    "start": "node dist/cli/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "vitest": "^2.0.0"
+  },
+  "keywords": ["codemin", "llm", "local", "coding", "assistant", "ollama"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rangel-cmd/codemin.git"
+  },
+  "homepage": "https://github.com/rangel-cmd/codemin#readme",
+  "bugs": {
+    "url": "https://github.com/rangel-cmd/codemin/issues"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
