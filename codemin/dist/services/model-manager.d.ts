@@ -5,6 +5,7 @@ export declare class ModelManager {
     resolve(modelName?: string): Promise<ModelConfig>;
     isInstalled(modelName: string): Promise<boolean>;
     downloadModel(modelName: string, force?: boolean): Promise<void>;
+    private getModelSize;
     removeModel(modelName: string): Promise<boolean>;
     switchModel(modelName: string): Promise<boolean>;
     listInstalledModels(): Promise<{

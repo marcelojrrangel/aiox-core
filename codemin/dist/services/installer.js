@@ -1,3 +1,4 @@
+import { cpus } from 'node:os';
 import { logger } from '../utils/logger.js';
 import { getCodeMinDir, getModelsDir, getConfigsDir, getLogsDir, getCacheDir } from '../utils/paths.js';
 import { executeAndCheck, execSyncSafe, isWindows, isMacOS, isLinux } from '../utils/shell.js';
@@ -120,7 +121,7 @@ export class Installer {
         logger.info(`  Node.js ${nodeVersion} ✓`);
         // Check OS
         logger.info(`  Sistema: ${process.platform} ${process.arch} ✓`);
-        logger.info(`  CPU: ${require('node:os').cpus().length} cores ✓`);
+        logger.info(`  CPU: ${cpus().length} cores ✓`);
         return true;
     }
     async ensureOllama() {

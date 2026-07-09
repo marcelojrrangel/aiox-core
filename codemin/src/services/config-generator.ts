@@ -4,7 +4,7 @@ import { homedir, cpus } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { logger } from '../utils/logger.js';
 import { getConfigsDir, getOpenCodeConfigPath, getContinueConfigPath } from '../utils/paths.js';
-import type { OpenCodeConfig, ContinueConfig } from '../types/index.js';
+import type { OpenCodeConfigV2, ContinueConfig } from '../types/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,15 +25,31 @@ function loadTemplate(name: string): string | null {
   return null;
 }
 
-const OPENCODE_TEMPLATE: OpenCodeConfig = {
-  provider: 'openai',
-  model: MODEL,
-  apiBase: API_BASE,
-  apiKey: 'codemin-local',
-  stream: true,
-  maxTokens: 2048,
-  temperature: 0.2,
-  contextLength: 8192,
+const OPENCODE_TEMPLATE: OpenCodeConfigV2 = {
+  $schema: 'https://opencode.ai/config.json',
+  model: 'codemin-local/qwen2.5-coder:1.5b',
+  provider: {
+    'codemin-local': {
+      npm: '@ai-sdk/openai-compatible',
+      name: 'CodeMin (Local Ollama)',
+      options: {
+        baseURL: API_BASE,
+      },
+      models: {
+        'qwen2.5-coder:7b': {
+          name: 'Qwen 2.5 Coder 7B',
+        },
+        'qwen2.5-coder:1.5b': {
+          name: 'Qwen 2.5 Coder 1.5B (Leve)',
+        },
+        'qwen3:8b': {
+          name: 'Qwen 3 8B',
+          tools: true,
+          reasoning: true,
+        },
+      },
+    },
+  },
 };
 
 const SYSTEM_MESSAGE = `Você é CodeMin, um assistente de codificação especializado.
@@ -83,7 +99,7 @@ function createContinueConfig(): ContinueConfig {
 export class ConfigGenerator {
   async generateOpenCodeConfig(): Promise<string> {
     const configPath = getOpenCodeConfigPath();
-    const config = OPENCODE_TEMPLATE;
+    const config: OpenCodeConfigV2 = OPENCODE_TEMPLATE;
 
     writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8');
     logger.success(` Arquivo gerado: ${configPath}`);
@@ -117,6 +133,7 @@ export class ConfigGenerator {
     logger.info('  Para usar com OpenCode:');
     logger.info(`    Copie o arquivo gerado para a raiz do seu projeto como opencode.json:`);
     logger.info(`    copy "${getOpenCodeConfigPath()}" .\\opencode.json`);
+    logger.info('  No OpenCode, selecione "CodeMin (Local Ollama)" como provider.');
     logger.info('');
     logger.info('  Para usar com Continue.dev (VS Code):');
     logger.info(`    Copie o arquivo para ~/.continue/config.json:`);

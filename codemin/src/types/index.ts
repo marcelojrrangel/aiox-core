@@ -76,15 +76,31 @@ export interface GenerateOptions {
   language?: string;
 }
 
+export interface OpenCodeProviderModel {
+  name?: string;
+  tools?: boolean;
+  reasoning?: boolean;
+}
+
+export interface OpenCodeProviderConfig {
+  npm: string;
+  name: string;
+  options: {
+    baseURL: string;
+    apiKey?: string;
+  };
+  models: Record<string, OpenCodeProviderModel>;
+}
+
+export interface OpenCodeConfigV2 {
+  $schema?: string;
+  model?: string;
+  provider: Record<string, OpenCodeProviderConfig>;
+}
+
 export interface OpenCodeConfig {
-  provider: string;
-  model: string;
-  apiBase: string;
-  apiKey: string;
-  stream: boolean;
-  maxTokens: number;
-  temperature: number;
-  contextLength: number;
+  $schema?: string;
+  provider: Record<string, OpenCodeProviderConfig>;
 }
 
 export interface ContinueConfig {

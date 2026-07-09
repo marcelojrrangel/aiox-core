@@ -165,38 +165,36 @@ export class ModelManager {
   }
 
   async downloadModel(modelName: string, force?: boolean): Promise<void> {
-    if (force) {
-      logger.info(`\n  🔄 Forçando redownload do modelo ${modelName}...`);
-      try {
-        await ollamaClient.pullModel(modelName, (status, completed, total) => {
-          if (total > 0) {
-            const pct = Math.min(Math.round((completed / total) * 100), 99);
-            logger.progress(pct, `Baixando ${modelName} — ${status}`);
-          } else {
-            logger.info(`  ${status}...`);
-          }
-        });
-      } catch {
-        // ignora erro no redownload
-      }
-    }
-
-    logger.info(`\n  📥 Baixando modelo ${modelName}...`);
+    logger.info(`\n  📥 Baixando modelo ${modelName} (~${this.getModelSize(modelName)})...`);
     logger.info(`  Isso pode levar alguns minutos dependendo da sua conexão.\n`);
+
+    if (force) {
+      logger.info('  🔄 Forçando redownload...');
+    }
 
     try {
       let lastStatus = '';
+      let lastPct = -1;
       await ollamaClient.pullModel(modelName, (status, completed, total) => {
-        if (status !== lastStatus) {
-          lastStatus = status;
-          if (total > 0) {
-            const pct = Math.min(Math.round((completed / total) * 100), 100);
-            logger.progress(pct, `Baixando ${modelName} — ${status}`);
-          } else {
-            logger.info(`  ${status}...`);
+        if (total > 0 && completed > 0) {
+          const pct = Math.min(Math.round((completed / total) * 100), 100);
+          if (pct !== lastPct) {
+            lastPct = pct;
+            logger.progress(pct, `${modelName} — ${status}`);
           }
+        } else if (status !== lastStatus) {
+          lastStatus = status;
+          const icons: Record<string, string> = {
+            pulling: '⬇️',
+            downloading: '📥',
+            verifying: '🔍',
+            unpacking: '📦',
+            success: '✅',
+          };
+          process.stdout.write(`\n  ${icons[status] ?? '⏳'} ${status}...`);
         }
       });
+      logger.progress(100, `${modelName} — concluído`);
       logger.success(` Modelo ${modelName} baixado com sucesso!`);
     } catch (error) {
       if (error instanceof Error && error.message.includes('timeout')) {
@@ -204,6 +202,13 @@ export class ModelManager {
       }
       throw error;
     }
+  }
+
+  private getModelSize(modelName: string): string {
+    for (const entry of Object.values(MODEL_DETAILS)) {
+      if (entry.id === modelName) return entry.size;
+    }
+    return '?';
   }
 
   async removeModel(modelName: string): Promise<boolean> {
@@ -338,6 +343,20 @@ export class ModelManager {
     if (result.success) {
       return { installed: true, version: result.stdout };
     }
+
+    const commonPaths = [
+      'C:\\Program Files\\Ollama\\ollama.exe',
+      `${process.env.LOCALAPPDATA}\\Programs\\Ollama\\ollama.exe`,
+      `${process.env.USERPROFILE}\\AppData\\Local\\Programs\\Ollama\\ollama.exe`,
+    ];
+
+    for (const p of commonPaths) {
+      if (existsSync(p)) {
+        const dir = p.replace(/\\ollama\.exe$/, '');
+        return { installed: true, version: `encontrado em ${dir}` };
+      }
+    }
+
     return { installed: false };
   }
 

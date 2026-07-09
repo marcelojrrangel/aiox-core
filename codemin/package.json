@@ -30,14 +30,15 @@
     "vitest": "^2.0.0"
   },
   "keywords": ["codemin", "llm", "local", "coding", "assistant", "ollama"],
+  "author": "marcelojrrangel",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rangel-cmd/codemin.git"
+    "url": "git+https://github.com/marcelojrrangel/codemin.git"
   },
-  "homepage": "https://github.com/rangel-cmd/codemin#readme",
+  "homepage": "https://github.com/marcelojrrangel/codemin#readme",
   "bugs": {
-    "url": "https://github.com/rangel-cmd/codemin/issues"
+    "url": "https://github.com/marcelojrrangel/codemin/issues"
   },
   "files": [
     "dist/",
