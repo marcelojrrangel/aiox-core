@@ -1,0 +1,1 @@
+{"version":3,"file":"doc-generator.d.ts","sourceRoot":"","sources":["../../src/services/doc-generator.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,mBAAmB,EAAE,MAAM,mBAAmB,CAAC;AAiB7D,qBAAa,YAAY;IACvB,OAAO,CAAC,OAAO,CAAS;gBAEZ,OAAO,SAAc;IAI3B,YAAY,CAAC,IAAI,EAAE,MAAM,EAAE,QAAQ,EAAE,MAAM,GAAG,OAAO,CAAC,mBAAmB,CAAC;IAgDhF,OAAO,CAAC,gBAAgB;CAQzB;AAED,eAAO,MAAM,YAAY,cAAqB,CAAC"}

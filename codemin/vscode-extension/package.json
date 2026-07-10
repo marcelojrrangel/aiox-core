@@ -1,0 +1,90 @@
+{
+  "name": "codemin",
+  "displayName": "CodeMin",
+  "description": "CodeMin — Assistente de Codificação LLM Local (CPU-only). Chat, explicar, revisar e gerar testes com modelos locais via Ollama.",
+  "version": "1.0.0",
+  "publisher": "codemin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codemin/codemin"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Chat",
+    "Other"
+  ],
+  "icon": "icon.png",
+  "activationEvents": [
+    "onCommand:codemin.chat",
+    "onCommand:codemin.explain",
+    "onCommand:codemin.review",
+    "onCommand:codemin.generateTests",
+    "onCommand:codemin.status",
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "codemin.chat",
+        "title": "CodeMin: Chat"
+      },
+      {
+        "command": "codemin.explain",
+        "title": "CodeMin: Explicar Seleção"
+      },
+      {
+        "command": "codemin.review",
+        "title": "CodeMin: Revisar Seleção"
+      },
+      {
+        "command": "codemin.generateTests",
+        "title": "CodeMin: Gerar Testes"
+      },
+      {
+        "command": "codemin.status",
+        "title": "CodeMin: Status"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codemin-sidebar",
+          "title": "CodeMin",
+          "icon": "icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "codemin-sidebar": [
+        {
+          "type": "webview",
+          "id": "codemin.chatView",
+          "name": "Chat"
+        },
+        {
+          "type": "tree",
+          "id": "codemin.statusView",
+          "name": "Status"
+        }
+      ]
+    }
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./tsconfig.json",
+    "watch": "tsc -watch -p ./tsconfig.json",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "eslint": "^8.56.0"
+  }
+}
