@@ -1,0 +1,14 @@
+{
+  "name": "create-aiox-core",
+  "version": "1.0.0",
+  "description": "Scaffold a new AIOX Core project with native OpenCode integration — 13 agents, 215+ tasks, 11 skills, and orchestrated workflows",
+  "keywords": ["aiox", "aiox-core", "opencode", "ai-orchestration", "scaffold"],
+  "homepage": "https://github.com/marcelojrrangel/aiox-core",
+  "bugs": { "url": "https://github.com/marcelojrrangel/aiox-core/issues" },
+  "license": "MIT",
+  "author": { "name": "Marcelo Jr Rangel", "url": "https://github.com/marcelojrrangel" },
+  "repository": { "type": "git", "url": "git+https://github.com/marcelojrrangel/aiox-core.git" },
+  "bin": { "create-aiox-core": "./bin/init.js" },
+  "engines": { "node": ">=18.0.0" },
+  "files": ["bin/", "templates/", "README.md"]
+}
