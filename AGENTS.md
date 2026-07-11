@@ -8,7 +8,7 @@ Remote: `https://github.com/marcelojrrangel/aiox-core.git`
 | Caminho | Papel |
 |---------|-------|
 | `.aiox-core/` | Framework core (orquestração, 215+ tasks, workflows) |
-| `.opencode/` | Camada de integração OpenCode (13 subagentes, 4 comandos) |
+| `.opencode/` | Camada de integração OpenCode (13 subagentes, 5 comandos, 11 skills) |
 | `.agent/workflows/` | Instruções de ativação dos agentes (12 arquivos) |
 | `opencode.json` | Config global OpenCode — define permissões, subagentes, comandos |
 | `bin/opencode-integration.js` | Script de sincronização: `node bin/opencode-integration.js sync` |
@@ -26,7 +26,7 @@ Remote: `https://github.com/marcelojrrangel/aiox-core.git`
 
 ## Agentes (@aiox-*)
 
-12 subagentes definidos em `opencode.json` + `@aiox-squad-creator`. Permissões granulares:
+13 subagentes definidos em `opencode.json`. Permissões granulares:
 - `@aiox-devops` é o **único** autorizado a `git push`
 - `@aiox-qa` deve ser **diferente** do executor da história
 - Comandos de agente usam prefixo `*` (ex: `*help`, `*develop`, `*gate`)

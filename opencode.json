@@ -205,6 +205,18 @@
           "*": "ask"
         }
       }
+    },
+    "aiox-squad-creator": {
+      "description": "🏗️ Craft — Squad Creator. Builder archetype. Use to create, validate, publish and manage squads",
+      "mode": "subagent",
+      "color": "#888888",
+      "permission": {
+        "read": "allow",
+        "edit": "allow",
+        "bash": {
+          "*": "ask"
+        }
+      }
     }
   },
   "command": {
