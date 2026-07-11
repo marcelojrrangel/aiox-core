@@ -6,18 +6,22 @@ Fork do [SynkraAI/aiox-core](https://github.com/SynkraAI/aiox-core) com camada d
 
 ## Início Rápido
 
+### Opção 1 — CLI (recomendado)
+
+```bash
+npx create-aiox-core meu-projeto
+cd meu-projeto
+opencode
+/aiox-init
+```
+
+### Opção 2 — Git clone
+
 ```bash
 git clone https://github.com/marcelojrrangel/aiox-core.git meu-projeto
 cd meu-projeto
-
-# Instalar dependência do plugin OpenCode
-cd .opencode && npm install
-cd ..
-
-# Abrir OpenCode
+cd .opencode && npm install && cd ..
 opencode
-
-# Verificar integração
 /aiox-init
 ```
 
