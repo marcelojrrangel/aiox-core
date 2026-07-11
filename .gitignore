@@ -11,3 +11,7 @@ env/
 .DS_Store
 Thumbs.db
 exemplos/
+.agents/
+.claude/
+.cursor/
+.windsurf/

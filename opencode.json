@@ -227,6 +227,11 @@
       "description": "Run an AIOX development workflow (development-cycle, qa-loop, spec-pipeline, etc.)",
       "agent": "aiox-orchestrator",
       "template": "Execute an AIOX workflow. Usage: /aiox-workflow <name> [--story <path>] [--epic <name>]. Available: development-cycle, qa-loop, spec-pipeline, greenfield-fullstack, greenfield-service, greenfield-ui, brownfield-fullstack, brownfield-discovery, auto-worktree, story-development-cycle. Load YAML from .aiox-core/development/workflows/<name>.yaml, parse phases, execute sequentially with proper agent assignments, handle errors per workflow definition, persist state to .aiox/workflow-state/."
+    },
+    "loop-architect": {
+      "description": "Ativa o Loop Engineering — ciclo auto-corretivo com roadmap, testes e lessons learned",
+      "agent": "aiox-dev",
+      "template": "Load the loop-engineering skill using skill tool. Then: 1. Check for roadmap.md, lessons.md, state.json in project root — create if missing. 2. Read current state and next task. 3. Execute the loop: analyze → code → test → self-correct → update state. 4. Run tests after every change. 5. If 2 consecutive attempts fail on same code, halt and ask user."
     }
   }
 }

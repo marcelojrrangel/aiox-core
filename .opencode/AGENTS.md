@@ -51,6 +51,7 @@ Use `@aiox-<name>` to invoke any agent:
 | `/aiox-init` | Initialize AIOX in the project |
 | `/aiox-story` | Create/manage user stories |
 | `/aiox-workflow` | Run an AIOX workflow |
+| `/loop-architect` | Loop Engineering — auto-correction cycle (roadmap → code → test → fix) |
 
 ## Key Conventions
 
@@ -61,6 +62,24 @@ Use `@aiox-<name>` to invoke any agent:
 - Tasks have an `IDE-FILE-RESOLUTION` section: map task names to `.aiox-core/development/tasks/<name>.md`
 - When an agent needs to execute a task, load the corresponding `.md` file from the tasks directory
 - Workflows define phases, agents, inputs/outputs, and error handlers
+
+## Installed Skills
+
+10 skills from [Tech Leads Club](https://agent-skills.techleads.club/skills/) in `.opencode/skills/` — load with `skill` tool:
+
+| Skill | Usage | Agent |
+|-------|-------|-------|
+| `tlc-spec-driven` | 4-phase planning (Spec→Design→Tasks→Impl) | master/orchestrator |
+| `security-best-practices` | OWASP/CWE per-language review | qa |
+| `playwright-skill` | E2E browser automation tests | qa |
+| `tactical-ddd` | Tactical DDD (aggregates, repositories) | architect |
+| `figma` | Design-to-code via Figma | ux |
+| `web-quality-audit` | Full web quality audit | qa |
+| `aws-advisor` | AWS architecture (cost, security, perf) | devops |
+| `skill-architect` | Create new skills for the framework | master |
+| `codenavi` | Intelligent codebase navigation | dev |
+| `sentry` | Error monitoring | devops |
+| `loop-engineering` | Self-correcting cycle (roadmap→code→test→fix) | dev |
 
 ## Workflow Engine
 

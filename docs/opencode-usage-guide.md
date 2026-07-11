@@ -20,7 +20,7 @@ Guia completo para usar o framework AIOX nativamente dentro do OpenCode CLI com 
 
 ## 1. Visão Geral
 
-O AIOX fornece 12 agentes especializados de IA que podem ser invocados diretamente no OpenCode via `@`-mention, mais 4 comandos custom via `/`. Cada agente tem uma persona, tom e conjunto de comandos específicos — extraídos das definições em `.aiox-core/development/agents/`.
+O AIOX fornece 12 agentes especializados de IA que podem ser invocados diretamente no OpenCode via `@`-mention, mais **5 comandos custom** via `/` e **11 skills especializadas** do Tech Leads Club. Cada agente tem uma persona, tom e conjunto de comandos específicos — extraídos das definições em `.aiox-core/development/agents/`.
 
 ### O que você pode fazer
 
@@ -391,6 +391,48 @@ Executa um workflow de desenvolvimento completo.
 /aiox-workflow brownfield-discovery --path ./app-legado
 ```
 
+### 5.5 /loop-architect
+
+Ativa o modo **Loop Engineering** — ciclo auto-corretivo com roadmap, testes e lessons learned.
+
+```
+/loop-architect Estou na fase 2, vamos implementar o módulo X
+```
+
+O agente `@aiox-dev` segue o fluxo:
+1. Lê `roadmap.md`, `lessons.md` e `state.json` (cria se não existirem)
+2. Analisa a próxima tarefa ou o erro atual
+3. Codifica a solução
+4. Executa os testes automaticamente
+5. Se falhar: registra em `lessons.md`, refatora e retenta (máx 2x)
+6. Atualiza o roadmap e o state
+
+---
+
+## 5a. Skills Especializadas
+
+O projeto inclui **11 skills** do [Tech Leads Club](https://agent-skills.techleads.club/skills/) em `.opencode/skills/`. Carregue-as com o comando `skill` para estender as capacidades dos agentes:
+
+| Skill | Agente | Quando usar |
+|-------|--------|-------------|
+| `tlc-spec-driven` | master/orchestrator | Planejamento em 4 fases (especificar → desenhar → tasks → implementar) |
+| `security-best-practices` | qa | Revisão de segurança OWASP/CWE por linguagem |
+| `playwright-skill` | qa | Automação de testes E2E no navegador |
+| `tactical-ddd` | architect | DDD tático (aggregates, repositories, value objects) |
+| `figma` | ux | Design-to-code via integração Figma |
+| `web-quality-audit` | qa | Auditoria completa de qualidade web |
+| `aws-advisor` | devops | Arquitetura AWS (custo, segurança, performance) |
+| `skill-architect` | master | Criação de novas skills para o framework |
+| `codenavi` | dev | Navegação inteligente em codebases |
+| `sentry` | devops | Monitoramento e diagnóstico de erros |
+| `loop-engineering` | dev | Ciclo auto-corretivo (roadmap → código → teste → correção) |
+
+Exemplo de uso:
+```
+@aiox-qa *load-skill security-best-practices
+@aiox-qa revise o código de autenticação com foco em OWASP
+```
+
 ---
 
 ## 6. Fluxos de Desenvolvimento Real
@@ -528,6 +570,54 @@ Executa um workflow de desenvolvimento completo.
 
 # Retomar de checkpoint
 @aiox-dev retomar-build
+```
+
+### 6.8 Loop Engineering
+
+O **Loop Engineering** é um ciclo auto-corretivo que segue: roadmap → código → testes → correção.
+
+```bash
+# Ativar o modo loop via comando custom
+/loop-architect Estou na fase 3, vamos implementar o serviço X
+```
+
+Fluxo completo do loop:
+
+```
+┌─────────────────┐
+│   roadmap.md    │  ← tarefas pendentes
+│   lessons.md    │  ← histórico de erros
+│   state.json    │  ← estado atual
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│   Analisar      │  ← próxima tarefa ou erro
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│   Codificar     │  ← implementar solução
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│   Testar        │  ← npm test / pytest / dotnet test
+└────────┬────────┘
+         │
+    ┌────┴────┐
+    ▼         ▼
+ Passou    Falhou
+    │         │
+    │    ┌────▼────────┐
+    │    │ lessons.md  │ ← registrar erro
+    │    │ Refatorar   │ ← tentar correção (máx 2x)
+    │    └────┬────────┘
+    │         ▼
+    │    ┌─────────┐
+    │    │ Perguntar│ ← se 2x falhar
+    │    └─────────┘
+    ▼
+┌─────────────────┐
+│ Atualizar       │  ← roadmap.md, state.json
+└─────────────────┘
 ```
 
 ---
@@ -689,6 +779,23 @@ A integração é transparente — você pode usar recursos do OpenCode junto co
 | `/aiox-init` | Verificar/instalar AIOX |
 | `/aiox-story` | Gerenciar histórias |
 | `/aiox-workflow` | Executar workflows |
+| `/loop-architect` | Loop Engineering (roadmap → código → teste → fix) |
+
+### Skills Disponíveis
+
+| Skill | Agente | Categoria |
+|-------|--------|-----------|
+| `tlc-spec-driven` | master/orchestrator | Planejamento |
+| `security-best-practices` | qa | Segurança |
+| `playwright-skill` | qa | Automação |
+| `tactical-ddd` | architect | Arquitetura |
+| `figma` | ux | Design |
+| `web-quality-audit` | qa | Qualidade |
+| `aws-advisor` | devops | Cloud |
+| `skill-architect` | master | Criação |
+| `codenavi` | dev | Navegação |
+| `sentry` | devops | Monitoramento |
+| `loop-engineering` | dev | Ciclo auto-corretivo |
 
 ### Workflows Disponíveis
 
@@ -716,6 +823,8 @@ A integração é transparente — você pode usar recursos do OpenCode junto co
 | Templates | `.aiox-core/development/templates/` |
 | Config | `.aiox-core/core-config.yaml` |
 | Skills OpenCode | `.opencode/skills/aiox-core/SKILL.md` |
+| Skills Tech Leads Club | `.opencode/skills/<nome>/SKILL.md` (11 skills) |
+| Loop Engineering skill | `.opencode/skills/loop-engineering/SKILL.md` |
 | Script de sincronização | `bin/opencode-integration.js` |
 | Sessões | `.aiox/sessions/` |
 | Logs | `.aiox/logs/` |
