@@ -22,6 +22,7 @@ Remote: `https://github.com/marcelojrrangel/aiox-core.git`
 - **Ajuda geral:** `/aiox-help`
 - **Executar workflow:** `/aiox-workflow <name> --story <path>`
 - **Sincronizar agentes:** `node bin/opencode-integration.js sync`
+- **Criar projeto novo:** `npx @marcelojrrangel/create-aiox-core <nome>`
 - **Dependências:** `npm install` em `.opencode/` (plugin `@opencode-ai/plugin`)
 
 ## Agentes (@aiox-*)

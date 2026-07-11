@@ -47,13 +47,16 @@ O AIOX fornece 12 agentes especializados de IA que podem ser invocados diretamen
 
 ### Obter o projeto
 
+**Opção 1 — CLI (recomendado)**
 ```bash
-# Clone o fork com a integração OpenCode já incluída
+npx @marcelojrrangel/create-aiox-core meu-projeto
+cd meu-projeto
+```
+
+**Opção 2 — Git clone**
+```bash
 git clone https://github.com/marcelojrrangel/aiox-core.git meu-projeto
 cd meu-projeto
-
-# Instale as dependências do AIOX
-npm install
 ```
 
 > **Nota:** Este fork já inclui toda a camada de integração (`.opencode/`, `opencode.json`, `bin/`). Diferente do `npx aiox-core init` que baixa o AIOX original sem as modificações.
@@ -77,12 +80,13 @@ Se o `/aiox-init` mostrar todos os componentes verdes, a integração está pron
 ### 3.1 Obter o projeto e iniciar uma sessão
 
 ```bash
-# Clone o fork (com AIOX + integração OpenCode)
-git clone https://github.com/marcelojrrangel/aiox-core.git meu-projeto
+# Opção 1: via npm (recomendado)
+npx @marcelojrrangel/create-aiox-core meu-projeto
 cd meu-projeto
 
-# Instale as dependências
-npm install
+# Opção 2: via git clone
+git clone https://github.com/marcelojrrangel/aiox-core.git meu-projeto
+cd meu-projeto
 
 # Inicie o OpenCode
 opencode

@@ -9,7 +9,7 @@ Fork do [SynkraAI/aiox-core](https://github.com/SynkraAI/aiox-core) com camada d
 ### Opção 1 — CLI (recomendado)
 
 ```bash
-npx create-aiox-core meu-projeto
+npx @marcelojrrangel/create-aiox-core meu-projeto
 cd meu-projeto
 opencode
 /aiox-init
